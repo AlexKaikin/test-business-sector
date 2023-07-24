@@ -8,7 +8,7 @@ import { scrollToTop } from '../../utils/scrollToTop'
 import './Posts.scss'
 
 export default function Posts() {
-  const { getPosts } = useActions()
+  const { getPosts, setPostsPage, setPostsQuery } = useActions()
   const { posts, pagination, filter, status } = useAppSelector(postsSelector)
   const navigate = useNavigate()
   const location = useLocation()
@@ -17,6 +17,15 @@ export default function Posts() {
     () => new URLSearchParams(location.search),
     [location.search]
   )
+  
+  useEffect(() => {
+    const pageParam = queryParams.get('_page')
+    const queryParam = queryParams.get('q')
+
+    if (pageParam) setPostsPage(+pageParam)
+    if (queryParam) setPostsQuery(queryParam)
+  }, [setPostsPage, setPostsQuery, queryParams])
+  
 
   useEffect(() => {
     if (filter.query !== '') queryParams.set('q', filter.query)

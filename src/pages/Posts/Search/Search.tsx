@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react'
-//import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import { SearchSVG } from '../../../common/svg'
 import { useActions } from '../../../hooks/useActions'
 
@@ -12,10 +11,13 @@ export default function Search({ query }: IProps) {
   const [searchValue, setSearchValue] = useState<string>(query)
   const searchRef = useRef<HTMLFormElement>(null)
 
+  console.log(query)
+
   function SearchValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchValue(e.target.value)
     if (e.target.value === '') {
       setPostsQuery('')
+      setPostsPage(1)
     }
   }
 
@@ -26,6 +28,8 @@ export default function Search({ query }: IProps) {
       setPostsPage(1)
     }
   }
+
+  useEffect(() => {setSearchValue(query)}, [query])
 
   return (
     <form ref={searchRef} className="users__search search">
