@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SearchSVG } from '../../../common/svg'
 import { useActions } from '../../../hooks/useActions'
 
@@ -6,15 +6,14 @@ interface IProps {
   query: string
 }
 
-export default function Search({ query }: IProps) {
+function Search({ query }: IProps) {
   const { setPostsQuery, setPostsPage } = useActions()
   const [searchValue, setSearchValue] = useState<string>(query)
   const searchRef = useRef<HTMLFormElement>(null)
 
-  console.log(query)
-
   function SearchValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchValue(e.target.value)
+
     if (e.target.value === '') {
       setPostsQuery('')
       setPostsPage(1)
@@ -48,3 +47,5 @@ export default function Search({ query }: IProps) {
     </form>
   )
 }
+
+export default React.memo(Search)
