@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  > .page {
+    color: #474955;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 137.687%;
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 10px;
+    
+    .page {
+      color: #474955;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 137.687%;
+
+      &.active {
+        color: #7ebc3c;
+      }
+    }
+  }
+}
