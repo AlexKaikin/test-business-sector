@@ -1,3 +1,4 @@
+import React from 'react'
 import PaginationCreator from '../../../common/PaginationCreator/PaginationCreator'
 import { useActions } from '../../../hooks/useActions'
 import { IPagination } from '../../../types/post'
@@ -6,7 +7,7 @@ type PropsType = {
   pagination: IPagination
 }
 
-export default function Pagination({ pagination }: PropsType) {
+function Pagination({ pagination }: PropsType) {
   const { setPostsPage } = useActions()
 
   function changePage(number: number) {
@@ -15,3 +16,5 @@ export default function Pagination({ pagination }: PropsType) {
 
   return <PaginationCreator changePage={changePage} pagination={pagination} />
 }
+
+export default React.memo(Pagination)
